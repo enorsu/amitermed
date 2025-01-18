@@ -4,7 +4,7 @@ const rightTriangle = "&#11208;"
 const downTriangle = "&#x2BC6;"
 const leftTriangle = "&#x2BC7;"
 
-const accountStatus = "active"
+var accountStatus = "active"
 const statusLabel = document.getElementById("status")
 
 const contactInfo = "Matrix: @norsu:pikaviestin.fi"
@@ -14,23 +14,36 @@ const contactInfoButton = document.getElementById("info-button")
 
 var isContactInfoDisplayed = false
 
-setStatusLabel()
-setUpInfo()
+const url = "http://37.114.46.37:6233/api/getstatus"
 
-function setStatusLabel() {
-    if (accountStatus == "active") {
+
+
+setUpInfo()
+var accountS = getData()
+console.log(accountS)
+setStatusLabel(accountS)
+
+
+function setStatusLabel(state) {
+    if (state == "active") {
         statusLabel.classList = "card-text text-bg-success rounded"
         statusLabel.innerHTML = "Account is active"
         return
             
-    } else if (accountStatus == "terminated") {
+    } else if (state == "terminated") {
         statusLabel.classList = "card-text text-bg-danger rounded"
         statusLabel.innerHTML = "Account is terminated⚠︎"
 
-    } else if (accountStatus == "restricted") {
+    } else if (state == "restricted") {
 
         statusLabel.classList = "card-text text-bg-warning rounded"
         statusLabel.innerHTML = "Account is restricted"
+    } else if (state == "error") {
+        statusLabel.classList = "card-text text-bg-danger rounded"
+        statusLabel.innerHTML = "Failed to fetch account status⚠︎"
+    } else {
+        statusLabel.classList = "card-text text-bg-warning rounded"
+        statusLabel.innerHTML = "Error, please check devtools console⚠︎"
     }
 
 }
@@ -54,3 +67,23 @@ function toggleInfo() {
 
     }
 }
+
+
+async function getData() {
+    
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+  
+      const json = await response.json();
+
+      return JSON.parse(json).state
+    } catch (error) {
+
+      return "error"
+    }
+    
+  }
+  
