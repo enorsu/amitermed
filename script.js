@@ -12,9 +12,7 @@ const contactInfo = "Matrix: @norsu:pikaviestin.fi"
 
 var isContactInfoDisplayed = false
 setStatusLabel()
-contactInfoTing(
 
-)
 function setStatusLabel() {
     if (accountStatus == "active") {
         statusLabel.classList = "card-text text-bg-success rounded"
@@ -33,19 +31,3 @@ function setStatusLabel() {
 
 }
 
-function contactInfoTing() {
-    contactInfoElement.style.cursor = "pointer"
-    contactInfoElement.addEventListener("click", toggleContactInfo)
-    contactInfoElement.innerHTML = leftTriangle + " Show contact information"
-}
-
-
-function toggleContactInfo() {
-    if (isContactInfoDisplayed) {
-        contactInfoElement.innerHTML = leftTriangle + " Show contact information"
-        isContactInfoDisplayed = false
-    } else {
-        contactInfoElement.innerHTML = rightTriangle + " " + contactInfo
-        isContactInfoDisplayed = true
-    }
-}
