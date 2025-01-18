@@ -1,4 +1,4 @@
-
+// professional fucking javascript
 
 const rightTriangle = "&#11208;"
 const downTriangle = "&#x2BC6;"
@@ -6,12 +6,16 @@ const leftTriangle = "&#x2BC7;"
 
 const accountStatus = "active"
 const statusLabel = document.getElementById("status")
-const contactInfoElement = document.getElementById("contactinfo")
+
 const contactInfo = "Matrix: @norsu:pikaviestin.fi"
 
+const contactInfoCard = document.getElementById("info")
+const contactInfoButton = document.getElementById("info-button")
 
 var isContactInfoDisplayed = false
+
 setStatusLabel()
+setUpInfo()
 
 function setStatusLabel() {
     if (accountStatus == "active") {
@@ -31,3 +35,22 @@ function setStatusLabel() {
 
 }
 
+
+function setUpInfo() {
+    contactInfoButton.addEventListener("click", toggleInfo)
+}
+
+function toggleInfo() {
+    if (isContactInfoDisplayed == false) {
+        contactInfoCard.style.visibility = "visible"
+        contactInfoCard.style.display = "contents"
+        contactInfoButton.innerHTML = "Hide contact information"
+        isContactInfoDisplayed = true;
+    } else if(isContactInfoDisplayed) {
+        contactInfoCard.style.visibility = "hidden"
+        contactInfoCard.style.display = "none"
+        contactInfoButton.innerHTML = "Show contact information"
+        isContactInfoDisplayed = false;
+
+    }
+}
