@@ -22,6 +22,7 @@ setUpInfo()
 var accountS = getData()
 console.log(accountS)
 setStatusLabel(accountS)
+setupAccountStatusButtons()
 
 
 function setStatusLabel(state) {
@@ -87,3 +88,10 @@ async function getData() {
     
   }
   
+
+function setupAccountStatusButtons() {
+    const rawAccountStatusBtn = document.getElementById("raw-status")
+    rawAccountStatusBtn.addEventListener("click", function () {
+        window.location.href = url
+    })
+}
